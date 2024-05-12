@@ -1,40 +1,105 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({Key? key}) : super(key: key);
 
-  final List<String> bulan = const [
-    "Artikel 1",
-    "Artikel 2",
-    "Artikel 3",
-    "Artikel 4",
-    "Artikel 5",
-    "Artikel 6",
-    "Artikel 7",
-    "Artikel 8",
-    "Artikel 9",
-    "Artikel 10",
+  final List<Map<String, dynamic>> jobVacancies = [
+    {
+      'title': 'Fullstack Android Developer',
+      'company': 'PT. Pertamina',
+      'workMethod': 'WFH',
+      'salary': '\$3000 - \$4000',
+      'postingDate': 'Posted 2 days ago',
+      'location': 'Jakarta, Indonesia',
+      'companyIcon': 'assets/images/company.png', // Path to company icon
+    },
+    {
+      'title': 'Backend Android Developer',
+      'company': 'PT. Bank Central Asia',
+      'workMethod': 'WFO',
+      'salary': '\$4000 - \$5000',
+      'postingDate': 'Posted 5 days ago',
+      'location': 'Jakarta, Indonesia',
+      'companyIcon': 'assets/images/company.png', // Path to company icon
+    },
+    {
+      'title': 'Backend Web Developer',
+      'company': 'PT. Bank Republik Indonesia',
+      'workMethod': 'WFO',
+      'salary': '\$4000 - \$5000',
+      'postingDate': 'Posted 5 days ago',
+      'location': 'Jakarta, Indonesia',
+      'companyIcon': 'assets/images/company.png', // Path to company icon
+    },
+    {
+      'title': 'Frontend Web Developer',
+      'company': 'PT. Nippon Electric Company',
+      'workMethod': 'WFO',
+      'salary': '\$4000 - \$5000',
+      'postingDate': 'Posted 5 days ago',
+      'location': 'Jakarta, Indonesia',
+      'companyIcon': 'assets/images/company.png', // Path to company icon
+    },
+    // Add more job vacancies here...
   ];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Flutter List",
-      home: Scaffold(
-        body: ListView.builder(
-          itemBuilder: (context, index) {
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text(bulan[index], style: TextStyle(fontSize: 30)),
-              ),
-            );
-          },
-          itemCount: bulan.length,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Job Vacancies'),
+      ),
+      body: ListView.separated(
+        padding: EdgeInsets.all(16.0),
+        itemCount: jobVacancies.length,
+        separatorBuilder: (BuildContext context, int index) => Divider(),
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Row(
+              children: [
+                Image.asset(
+                  jobVacancies[index]['companyIcon'], // Path to company icon
+                  width: 24, // Customize icon size as needed
+                  height: 24,
+                ),
+                SizedBox(width: 8),
+                Text(
+                  jobVacancies[index]['title']!,
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Company: ${jobVacancies[index]['company']}',
+                  style: TextStyle(fontSize: 14.0),
+                ),
+                Text(
+                  'Work Method: ${jobVacancies[index]['workMethod']}',
+                  style: TextStyle(fontSize: 14.0),
+                ),
+                Text(
+                  'Salary: ${jobVacancies[index]['salary']}',
+                  style: TextStyle(fontSize: 14.0),
+                ),
+                Text(
+                  'Posting Date: ${jobVacancies[index]['postingDate']}',
+                  style: TextStyle(fontSize: 14.0),
+                ),
+                Text(
+                  'Location: ${jobVacancies[index]['location']}',
+                  style: TextStyle(fontSize: 14.0),
+                ),
+              ],
+            ),
+            trailing: Icon(Icons.arrow_forward),
+            onTap: () {
+              // Action when item is tapped, e.g., navigate to job detail page
+            },
+          );
+        },
       ),
     );
   }

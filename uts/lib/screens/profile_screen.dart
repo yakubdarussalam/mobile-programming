@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               tabs: [
                 Tab(text: 'Info'),
                 Tab(text: 'Account'),
-                Tab(text: 'Company'),
+                Tab(text: 'Data'),
               ],
             ),
           ),
@@ -36,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               buildInfoTab(),
               buildAccountTab(),
-              buildCompanyTab(),
+              buildDataTab(),
             ],
           ),
         ),
@@ -97,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Column(
                     children: const [
                       Text(
-                        'Photos',
+                        'Connection',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -106,10 +106,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        '150',
+                        '500+',
                         style: TextStyle(
                           color: Colors.indigo,
-                          fontSize: 16,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -118,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Column(
                     children: const [
                       Text(
-                        'Followers',
+                        'Work Experience',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -127,10 +127,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        '1M',
+                        '2 Years',
                         style: TextStyle(
                           color: Colors.indigo,
-                          fontSize: 18,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -139,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Column(
                     children: const [
                       Text(
-                        'Following',
+                        'Status',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -148,10 +148,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        '50',
+                        'Unemployed',
                         style: TextStyle(
                           color: Colors.indigo,
-                          fontSize: 18,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -167,29 +167,113 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget buildAccountTab() {
-    return Column(children: [
-      Text(
-        "Account Tab",
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 38, 67, 67),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            "Settings",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 38, 67, 67),
+            ),
+          ),
         ),
-      ),
-    ]);
+        ListTile(
+          leading: Icon(Icons.person),
+          title: Text("Edit Profile"),
+          onTap: () {
+            // Action when Edit Profile is tapped
+            Get.to(ProfileEditScreen());
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.lock),
+          title: Text("Change Password"),
+          onTap: () {
+            // Action when Change Password is tapped
+            // Implement your logic here
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.notifications),
+          title: Text("Notification Settings"),
+          onTap: () {
+            // Action when Notification Settings is tapped
+            // Implement your logic here
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.language),
+          title: Text("Language"),
+          onTap: () {
+            // Action when Language is tapped
+            // Implement your logic here
+          },
+        ),
+        // Add more menu items here...
+      ],
+    );
   }
 
-  Widget buildCompanyTab() {
-    return Column(children: [
-      Text(
-        "Company Tab",
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 38, 67, 67),
-        ),
+  Widget buildDataTab() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Data",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 38, 67, 67),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.work),
+            title: Text("Work Experience"),
+            subtitle: Text("2 years as Software Engineer"),
+            onTap: () {
+              // Action when Work Experience is tapped
+              // Implement your logic here
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.school),
+            title: Text("Education"),
+            subtitle: Text("Bachelor's Degree in Computer Science"),
+            onTap: () {
+              // Action when Education is tapped
+              // Implement your logic here
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.star),
+            title: Text("Certified"),
+            subtitle: Text("AWS Certified Developer"),
+            onTap: () {
+              // Action when Certified is tapped
+              // Implement your logic here
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.star),
+            title: Text("Skills"),
+            subtitle: Text("Flutter, Dart, Firebase, UI/UX Design"),
+            onTap: () {
+              // Action when Skills is tapped
+              // Implement your logic here
+            },
+          ),
+          // Add more data content here...
+        ],
       ),
-    ]);
+    );
   }
 
   final imageHeader = Container(
@@ -234,7 +318,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     margin: EdgeInsets.all(54),
     child: Column(
       children: [
-        SizedBox(height: 24),
         Row(
           children: const [
             Icon(
@@ -260,17 +343,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Row(
           children: const [
             Icon(
-              Icons.group_add,
-              color: Colors.indigo,
-            ),
-            SizedBox(width: 15),
-            Text("Add to Group"),
-          ],
-        ),
-        SizedBox(height: 15),
-        Row(
-          children: const [
-            Icon(
               Icons.location_city,
               color: Colors.indigo,
             ),
@@ -282,11 +354,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Row(
           children: const [
             Icon(
-              Icons.comment,
+              Icons.date_range,
               color: Colors.indigo,
             ),
             SizedBox(width: 15),
-            Text("Show all Comments"),
+            Text("32 Years Old"),
           ],
         ),
       ],

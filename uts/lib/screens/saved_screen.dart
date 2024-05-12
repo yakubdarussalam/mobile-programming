@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
+class SavedScreen extends StatelessWidget {
+  const SavedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +11,13 @@ class SettingScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          Icons.settings,
+          Icons.save,
           color: Colors.indigo,
           size: 64,
         ),
         Center(
           child: Text(
-            "Setting Screen",
+            "Saved Job",
             style: TextStyle(
                 fontSize: 24,
                 color: Colors.indigo,
