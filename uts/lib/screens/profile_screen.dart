@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uts/main.dart';
 import 'package:uts/screens/profile_edit_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -213,7 +214,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             // Implement your logic here
           },
         ),
-        // Add more menu items here...
+        Spacer(), // Pushes the following button to the bottom
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ElevatedButton(
+            onPressed: () {
+              // Sign out action
+              Get.off(LoginScreen());
+            },
+            child: Text('Sign Out'),
+            style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 50), // Full width button
+                shadowColor: Colors.red // Button color
+                ),
+          ),
+        ),
       ],
     );
   }
