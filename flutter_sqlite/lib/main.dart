@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sqlite/contact.dart';
+import 'package:flutter_sqlite/contact_detail.dart';
 import 'package:flutter_sqlite/contactdataaccess.dart';
 import 'package:get/get.dart';
 
@@ -38,6 +39,11 @@ class MyApp extends StatelessWidget {
                 itemBuilder: (context, index) {
                   var contact = list[index];
                   return ListTile(
+                    onTap: () async {
+                      await Get.to(() => ContactDetail(id: contact.id));
+                      loadData();
+                    },
+                    leading: Icon(Icons.person),
                     title: Text(contact.name),
                     subtitle: Text(contact.phone),
                     trailing: Text(contact.email),
@@ -46,12 +52,8 @@ class MyApp extends StatelessWidget {
               )),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            dataAccess.insert(Contact(
-                id: 0,
-                name: "Budi",
-                email: "budi@gmail.com",
-                phone: "08122323132"));
+          onPressed: () async {
+            await Get.to(() => ContactDetail(id: 0));
             loadData();
           },
           child: Icon(Icons.add),

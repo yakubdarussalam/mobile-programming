@@ -25,9 +25,20 @@ class ContactDataAccess {
     return result;
   }
 
-  update(Contact contact) {}
+  update(Contact contact) async {
+    final db = await DatabaseProvider.db.database;
+    var result = await db.update("Contact", contact.toMap(),
+        where: "id=?", whereArgs: [contact.id]);
+  }
 
-  delete(int id) {}
+  delete(int id) async {
+    final db = await DatabaseProvider.db.database;
+    var result = await db.delete("Contact", where: "id=?", whereArgs: [id]);
+  }
 
-  deleteAll() {}
+  deleteAll() async {
+    final db = await DatabaseProvider.db.database;
+    var result = await db.delete("Contact");
+    return result;
+  }
 }
