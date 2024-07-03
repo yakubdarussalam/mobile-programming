@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_restapi/product_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductController extends GetxController {
   var isLoading = false.obs;
@@ -9,15 +10,18 @@ class ProductController extends GetxController {
   List<Product> products = <Product>[].obs;
   late Product product;
 
+  late SharedPreferences pref;
+
   @override
   void onInit() async {
     super.onInit();
-    await getProducts(1);
+    pref = await SharedPreferences.getInstance();
+    await getProducts();
   }
 
   refreshProduct() async {
     products.clear();
-    await getProducts(1);
+    await getProducts();
   }
 
   createProduct() {
@@ -35,11 +39,12 @@ class ProductController extends GetxController {
         images: '');
   }
 
-  getProducts(int page) async {
+  getProducts() async {
     try {
       isLoading(true);
+      final headers = createHeaders();
       final response =
-          await http.get(Uri.parse("$url/products?page=$page&perpage=100"));
+          await http.get(Uri.parse("$url/products"), headers: headers);
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
         products = List<Product>.from(
@@ -97,5 +102,13 @@ class ProductController extends GetxController {
     }
     print("Failed to delete product: ${response.statusCode} ${response.body}");
     return false;
+  }
+
+  createHeaders() {
+    var accessToken = pref.getString("access_token");
+    return {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $accessToken"
+    };
   }
 }
